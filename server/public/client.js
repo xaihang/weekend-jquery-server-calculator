@@ -3,6 +3,9 @@ $(document).ready(onReady);
 //  state
 let usersInput = [];
 let userMathInput = '';
+let historyLogs = [];
+let result = undefined; 
+
 
 function onReady() {
   console.log('in onReady... JQUERY is kicking');
@@ -77,4 +80,19 @@ function getUsersInput(event) {
   });
 
   // render();
+}
+
+function getResult() {
+
+    $.ajax({
+        method: 'GET',
+        url: '/inputs',
+      }).then(function(response) {
+          console.log("in getResult... got a response?", response);
+
+        result = response;
+        console.log("in getResult... got a result?", result);
+
+        }
+      );
 }
