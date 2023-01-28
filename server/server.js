@@ -8,12 +8,13 @@ app.use(express.static('server/public'));
 
 let usersInput = []
 
+// POST to get inputs of firstNumber and secondNumber
 app.post('/inputs', (req, res) => {
     console.log(req)
     console.log('/inputs of the POST request', req.body);
     console.log('firstNumberInput:', req.body.firstNumberInput);
     console.log('secondNumberInput:', req.body.secondNumberInput);
-
+    console.log('mathInput', req.body.mathInput)
     // capture the variables from req.body
     const firstNumberInput = req.body.firstNumberInput;
     // console.log(req.body.firstNumberInput);

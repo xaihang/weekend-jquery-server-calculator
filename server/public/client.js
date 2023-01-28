@@ -1,43 +1,80 @@
 $(document).ready(onReady);
 
 //  state
-let usersInput = []; 
+let usersInput = [];
+let userMathInput = '';
 
 function onReady() {
-    console.log('in onReady... JQUERY is kicking');
- 
-  $('#resultBtn').on('click', getUsersInput)
+  console.log('in onReady... JQUERY is kicking');
+
+  // equal btn
+  $('#resultBtn').on('click', getUsersInput);
+
+  // add btn
+  $('#additionBtn').on('click', (event) => {
+    event.preventDefault();
+    setMath('+');
+  });
+
+  // subtraction btn
+  $('#subtractionBtn').on('click', (event) => {
+    event.preventDefault();
+    setMath('-');
+  });
+
+  // multiply btn
+  $('#multiplicationBtn').on('click', (event) => {
+    event.preventDefault();
+    setMath('*');
+  });
+
+  // divide btn
+  $('#divisionBtn').on('click', (event) => {
+    event.preventDefault();
+    setMath('/');
+  });
+
+  // clear Btn
+  $('#clearBtn').on('click', clearInput);
 }
 
-function getUsersInput() {
+function setMath(input) {
+  userMathInput = input;
+}
 
-    console.log('INSIDE usersInput ...');
+// clear
 
-    let newInputs = {
-        firstNumberInput: $('#firstNumberInput').val(),
-        secondNumberInput: $('#secondNumberInput').val(),
-    } 
+function clearInput(event) {
+  // empty out the input field for the next entry
+  event.preventDefault();
+  $('#firstNumberInput').val('');
+  $('#secondNumberInput').val('');
+}
 
-    // empty out the input field for the next entry
-    $('#firstNumberInput').val('');
-    $('#secondNumberInput').val('');
+function getUsersInput(event) {
+  event.preventDefault();
 
-    console.log('newInputs = ', newInputs);
+  console.log('INSIDE usersInput ...');
 
-    $.ajax({
-        type: "POST",
-        url: '/inputs',
-        data: newInputs,
+  let newInputs = {
+    firstNumberInput: $('#firstNumberInput').val(),
+    secondNumberInput: $('#secondNumberInput').val(),
+    mathInput: userMathInput,
+  };
 
-      }).then(function(response) {
-          console.log("SUCCESS!!! for newInputs");
+  console.log('newInputs = ', newInputs);
 
-          // render new data to dom
-          usersInput.push(newInputs);
-            // render();
-        }
-      );
+  $.ajax({
+    type: 'POST',
+    url: '/inputs',
+    data: newInputs,
+  }).then(function (response) {
+    console.log('SUCCESS!!! for newInputs');
 
-    // render(); 
+    // render new data to dom
+    usersInput.push(newInputs);
+    // render();
+  });
 
+  // render();
 }
