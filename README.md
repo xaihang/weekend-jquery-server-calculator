@@ -22,7 +22,7 @@ Please visit the site to view its full functionality: [DEPLOYED VERSION OF APP](
 ----
 ## Screen Shot
 
-![calculator - server side](/images/screenshot.png)
+![calculator - server side](/images/screenshot.gif)
 
 
 ----
