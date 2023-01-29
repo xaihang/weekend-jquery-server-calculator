@@ -6,7 +6,7 @@ let firstNumberInput = '';
 let secondNumberInput = '';
 
 function onReady() {
-    getHistoryLogs();
+  getHistoryLogs();
   $('.btn').on('click', selectedInputs);
 }
 
@@ -33,11 +33,21 @@ function selectedInputs() {
 
   if (inputClicked === '=') {
     postUsersInput();
+    $('.calculator-screen').val('');
     // console.log('firstNumberInput', firstNumberInput);
     // console.log('mathInput', mathInput);
     // console.log('secondNumberInput', secondNumberInput.substring(1));
   } else {
     $('.calculator-screen').val(currentNumberInputs);
+  }
+
+  // when 'clear btn' clicked, reset to initial state
+  if (inputClicked === 'Clear') {
+    $('.calculator-screen').val('');
+    currentNumberInputs = '';
+    mathInput = '';
+    firstNumberInput = '';
+    secondNumberInput = '';
   }
 
   if (mathInput !== '') {
@@ -63,48 +73,70 @@ function postUsersInput() {
     console.log('ajax POST from client-side is successful');
 
     // after POST ---  created a GET to retrieve calculated result
-    // getResult();
+    getResult();
+  });
+}
+
+// GET to retrieve calculated result
+function getResult() {
+  $.ajax({
+    method: 'GET',
+    url: '/calculated-result',
+  }).then(function (response) {
+    console.log(
+      'ajax GET in getResult() on client-side - got a response?',
+      response
+    );
+
+    //  variable created to parse the object data into number
+    calculatedResult = response.result;
+    console.log(
+      'ajax GET in getResult() on client-side - got a result?',
+      calculatedResult
+    );
+
+    getHistoryLogs();
   });
 }
 
 function render() {
-    $('#historyLogs').empty();
-    $('#resultDisplay').empty();
-  
-    //display calculated result on DOM
-    $('#resultDisplay').append(`
+  $('#historyLogs').empty();
+  $('#resultDisplay').empty();
+
+  //display calculated result on DOM
+  $('#resultDisplay').append(`
       <h2>${calculatedResult}</h2>`);
-  
-    // display history logs on DOM:
-    for (let i = 0; i < historyLogs.length; i++) {
-      let log = historyLogs[i];
-      console.log('render log: ', log);
-  
-      $('#historyLogs').append(`
+
+  // display history logs on DOM:
+  for (let i = 0; i < historyLogs.length; i++) {
+    let log = historyLogs[i];
+    console.log('render log: ', log);
+
+    $('#historyLogs').append(`
       <li>${log.firstNumberInput} ${log.mathInput} ${log.secondNumberInput} = ${log.calculatedResult}</li>
       `);
-    }
   }
-  
+}
+
 // ----------------- HISTORY--------------//
 
 function getHistoryLogs() {
-    $.ajax({
-      method: 'GET',
-      url: '/history-logs',
-    }).then(function (response) {
-      console.log(
-        'ajax GET in getHistory() on client-side - got a response?',
-        response
-      );
-  
-      historyLogs = response;
-      console.log(
-        'ajax GET in getHistory() on client-side - got a historylog?',
-        historyLogs
-      );
-  
-      // then call the render() to display the result on DOM
-      render();
-    });
-  }
+  $.ajax({
+    method: 'GET',
+    url: '/history-logs',
+  }).then(function (response) {
+    console.log(
+      'ajax GET in getHistory() on client-side - got a response?',
+      response
+    );
+
+    historyLogs = response;
+    console.log(
+      'ajax GET in getHistory() on client-side - got a historylog?',
+      historyLogs
+    );
+
+    // then call the render() to display the result on DOM
+    render();
+  });
+}
