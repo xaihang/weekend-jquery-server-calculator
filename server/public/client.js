@@ -4,6 +4,7 @@ let currentNumberInputs = '';
 let mathInput = '';
 let firstNumberInput = '';
 let secondNumberInput = '';
+let historyLogs = []
 
 async function onReady() {
   await getHistoryLogs();
