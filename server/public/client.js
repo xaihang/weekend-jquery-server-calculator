@@ -110,9 +110,13 @@ function render() {
   //display history log on DOM
   $('#historyLogs').append(liElHistory);
 
-  //display calculated result on DOM
-  $('#resultDisplay').append(`
-      <h2>${calculatedResult}</h2>`);
+  //updated code - display calculated result on the calculator screen
+  $('.calculator-screen').val(calculatedResult);
+
+  // og code - display the calculated result below cal UI
+  // $('#resultDisplay').append(`
+  //     <h2>${calculatedResult}</h2>`);
+  
 }
 
 function getHistoryLogs() {
