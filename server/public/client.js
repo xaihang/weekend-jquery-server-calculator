@@ -9,6 +9,7 @@ let historyLogs = [];
 async function onReady() {
   await getHistoryLogs();
   $('.btn').on('click', selectedInputs);
+  $('#deleteBtn').on('click', onDeleteBtn);
 }
 
 function selectedInputs() {
@@ -55,6 +56,14 @@ function selectedInputs() {
 
   if (mathInput !== '') {
     secondNumberInput = secondNumberInput.concat(inputClicked);
+  }
+
+  // check if input clicked is NOT 'delete' then display currentNumber Inputs
+  // otherwise if 'delete' is clicked then do not display the word 'delete' on calc screen
+  if (inputClicked !== 'Delete') {
+    $('.calculator-screen').val(currentNumberInputs);
+  } else {
+    $('.calculator-screen').val('');
   }
 }
 
@@ -130,4 +139,9 @@ function getHistoryLogs() {
     // then call the render() to display the result on DOM
     render();
   });
+}
+
+function onDeleteBtn() {
+  historyLogs = [];
+  $('#historyLogs').empty();
 }
