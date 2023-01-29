@@ -1,9 +1,45 @@
-# Project Name
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+# Calculator - server side 
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+This application allows users to input numbers and choose a mathematical operation. Upon clicking the submit (`=`) button, the calculation is performed on the server-side via a POST request, and the result can be retrieved using a GET request. The Clear button erases both user inputs and displayed results. The application also keeps a record of all previous calculations on the server and displays a list of them when the page loads using a GET request. The history log updates dynamically with each new calculation and remains accessible even after refreshing the page.
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+</br>
+
+>**TABLE OF CONTENT:**
+1. [Deployed link](#deployed-link) 
+1. [Screen shot](#screen-shot)
+1. [Technologies utilization](#technologies-utilization) 
+1. [Support](#support)
+
+</br>
+
+-----
+## Deployed link
+Please visit the site to view its full functionality: [DEPLOYED VERSION OF APP](https://weekend-jquery-server-calc.herokuapp.com/)
+
+----
+## Screen Shot
+
+![calculator - server side](/screenshot.png)
+
+----
+## Technologies utilization 
+
+* Node JS & Express
+* jQuery
+* Javascript
+* HTML
+* CSS
+* Bootstrap
+* GitHub 
+* Heroku 
+
+---
+## Support
+If you have any questions, suggestions, or inquiries, feel free to email me: [click here](mailto:xaihang12@gmail.com?subject=[GitHub]%20Supoort%20Question%20Inquries)! 
+
+---
+
+> **_“I am always doing that which I cannot do, in order that I may learn how to do it.”_** ― Pablo Picasso

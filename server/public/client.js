@@ -53,6 +53,7 @@ function selectedInputs() {
     mathInput = '';
     firstNumberInput = '';
     secondNumberInput = '';
+    $('#resultDisplay').empty();
   }
 
   if (mathInput !== '') {
