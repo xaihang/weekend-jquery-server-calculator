@@ -5,8 +5,8 @@ let mathInput = '';
 let firstNumberInput = '';
 let secondNumberInput = '';
 
-function onReady() {
-  getHistoryLogs();
+async function onReady() {
+  await getHistoryLogs();
   $('.btn').on('click', selectedInputs);
 }
 
@@ -34,6 +34,10 @@ function selectedInputs() {
   if (inputClicked === '=') {
     postUsersInput();
     $('.calculator-screen').val('');
+    currentNumberInputs = '';
+    mathInput = '';
+    firstNumberInput = '';
+    secondNumberInput = '';
     // console.log('firstNumberInput', firstNumberInput);
     // console.log('mathInput', mathInput);
     // console.log('secondNumberInput', secondNumberInput.substring(1));
@@ -83,39 +87,31 @@ function getResult() {
     method: 'GET',
     url: '/calculated-result',
   }).then(function (response) {
-    console.log(
-      'ajax GET in getResult() on client-side - got a response?',
-      response
-    );
-
-    //  variable created to parse the object data into number
     calculatedResult = response.result;
-    console.log(
-      'ajax GET in getResult() on client-side - got a result?',
-      calculatedResult
-    );
-
     getHistoryLogs();
   });
 }
 
 function render() {
-  $('#historyLogs').empty();
-  $('#resultDisplay').empty();
-
-  //display calculated result on DOM
-  $('#resultDisplay').append(`
-      <h2>${calculatedResult}</h2>`);
-
-  // display history logs on DOM:
+  console.log('historyLogs', historyLogs);
+  // create li element that have the history log
+  let liElHistory = '';
   for (let i = 0; i < historyLogs.length; i++) {
     let log = historyLogs[i];
     console.log('render log: ', log);
-
-    $('#historyLogs').append(`
-      <li>${log.firstNumberInput} ${log.mathInput} ${log.secondNumberInput} = ${log.calculatedResult}</li>
-      `);
+    liElHistory += `
+    <li>${log.firstNumberInput} ${log.mathInput} ${log.secondNumberInput} = ${log.calculatedResult}</li>
+    `;
   }
+
+  $('#historyLogs').empty();
+  $('#resultDisplay').empty();
+
+  $('#historyLogs').append(liElHistory);
+
+//display calculated result on DOM
+  $('#resultDisplay').append(`
+      <h2>${calculatedResult}</h2>`);
 }
 
 // ----------------- HISTORY--------------//
@@ -125,16 +121,8 @@ function getHistoryLogs() {
     method: 'GET',
     url: '/history-logs',
   }).then(function (response) {
-    console.log(
-      'ajax GET in getHistory() on client-side - got a response?',
-      response
-    );
-
+    console.log('getHistoryLogs response', response);
     historyLogs = response;
-    console.log(
-      'ajax GET in getHistory() on client-side - got a historylog?',
-      historyLogs
-    );
 
     // then call the render() to display the result on DOM
     render();
