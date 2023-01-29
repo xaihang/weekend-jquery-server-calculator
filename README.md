@@ -22,19 +22,20 @@ Please visit the site to view its full functionality: [DEPLOYED VERSION OF APP](
 ----
 ## Screen Shot
 
-![calculator - server side](/screenshot.png)
+![calculator - server side](/images/screenshot.png)
 
 ----
 ## Technologies utilization 
 
-* Node JS & Express
-* jQuery
+* [Node js](https://nodejs.org/en/about/)
+* [Express js](https://expressjs.com/)
+* [jQuery](https://jquery.com/)
 * Javascript
 * HTML
 * CSS
-* Bootstrap
-* GitHub 
-* Heroku 
+* [Bootstrap](https://getbootstrap.com/)
+* [GitHub](https://github.com/xaihang/) 
+* [Heroku](https://www.heroku.com/about) 
 
 ---
 ## Support
