@@ -10,6 +10,7 @@ async function onReady() {
   await getHistoryLogs();
   $('.btn').on('click', selectedInputs);
   $('#deleteBtn').on('click', onDeleteBtn);
+
 }
 
 function selectedInputs() {
@@ -17,7 +18,7 @@ function selectedInputs() {
   const inputClicked = $(this)[0].innerText;
   if (mathInput === '') {
     firstNumberInput = currentNumberInputs;
-  }
+  } 
 
   //checking if user selected an mathInput
   if (
@@ -26,6 +27,11 @@ function selectedInputs() {
     inputClicked === '*' ||
     inputClicked === '/'
   ) {
+
+    if(mathInput !== ''){
+      return
+    }
+
     //when user selected an mathInput assign the mathInput to mathInput variable
     mathInput = inputClicked;
   }
@@ -33,7 +39,10 @@ function selectedInputs() {
   //add selected input to currentNumberInputs to get display
   currentNumberInputs = currentNumberInputs.concat(inputClicked);
 
+  
+
   if (inputClicked === '=') {
+
     postUsersInput();
     $('.calculator-screen').val('');
     currentNumberInputs = '';
@@ -52,19 +61,22 @@ function selectedInputs() {
     firstNumberInput = '';
     secondNumberInput = '';
     $('#resultDisplay').empty();
+  
   }
 
   if (mathInput !== '') {
     secondNumberInput = secondNumberInput.concat(inputClicked);
   }
 
-  // check if input clicked is NOT 'delete' then display currentNumber Inputs
+
+   // check if input clicked is NOT 'delete' then display currentNumber Inputs
   // otherwise if 'delete' is clicked then do not display the word 'delete' on calc screen
-  if (inputClicked !== 'Delete') {
-    $('.calculator-screen').val(currentNumberInputs);
-  } else {
-    $('.calculator-screen').val('');
-  }
+  // if (inputClicked !== 'Delete') {
+  //   $('.calculator-screen').val(currentNumberInputs);
+  // } else {
+  //   $('.calculator-screen').empty();
+  // }
+
 }
 
 function postUsersInput() {
