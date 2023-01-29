@@ -4,7 +4,7 @@ let currentNumberInputs = '';
 let mathInput = '';
 let firstNumberInput = '';
 let secondNumberInput = '';
-let historyLogs = []
+let historyLogs = [];
 
 async function onReady() {
   await getHistoryLogs();
@@ -25,7 +25,7 @@ function selectedInputs() {
     inputClicked === '*' ||
     inputClicked === '/'
   ) {
-    //when user slected an mathInput assign the mathInput to mathInput variable
+    //when user selected an mathInput assign the mathInput to mathInput variable
     mathInput = inputClicked;
   }
 
@@ -39,9 +39,6 @@ function selectedInputs() {
     mathInput = '';
     firstNumberInput = '';
     secondNumberInput = '';
-    // console.log('firstNumberInput', firstNumberInput);
-    // console.log('mathInput', mathInput);
-    // console.log('secondNumberInput', secondNumberInput.substring(1));
   } else {
     $('.calculator-screen').val(currentNumberInputs);
   }
@@ -106,17 +103,17 @@ function render() {
     `;
   }
 
+  // empty history log and display each time before new append
   $('#historyLogs').empty();
   $('#resultDisplay').empty();
 
+  //display history log on DOM
   $('#historyLogs').append(liElHistory);
 
-//display calculated result on DOM
+  //display calculated result on DOM
   $('#resultDisplay').append(`
       <h2>${calculatedResult}</h2>`);
 }
-
-// ----------------- HISTORY--------------//
 
 function getHistoryLogs() {
   $.ajax({
